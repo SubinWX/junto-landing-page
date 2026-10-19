@@ -5,6 +5,7 @@
 // Set the live domain when building so canonical / Open Graph tags and the
 // sitemap can be generated:
 //   SITE_URL=https://www.example.com npm run build
+// On Vercel the production domain is picked up automatically.
 import { readFile, writeFile, rm } from "node:fs/promises";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import path from "node:path";
@@ -13,7 +14,11 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const dist = path.join(root, "dist");
 const ssrDir = path.join(root, "dist-ssr");
 
-const siteUrl = (process.env.SITE_URL || "").replace(/\/+$/, "");
+const vercelUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL;
+const siteUrl = (process.env.SITE_URL || (vercelUrl ? `https://${vercelUrl}` : "")).replace(
+  /\/+$/,
+  ""
+);
 if (!siteUrl) {
   console.warn(
     "\n[prerender] SITE_URL is not set. Skipping canonical, og:url, og:image, and sitemap.xml." +

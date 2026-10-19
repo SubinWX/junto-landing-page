@@ -1,0 +1,12 @@
+node_modules
+dist
+.DS_Store
+dist-ssr
+
+# Local backups from the Next.js experiment
+_vite-legacy
+_nextjs-version
+
+# Unused originals (replaced by feature-team-2x.png and founders-photo.jpg)
+public/images/feature-team.svg
+public/images/founders-photo.png

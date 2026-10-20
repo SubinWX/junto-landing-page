@@ -42,8 +42,21 @@
   --bg: #f5f6f8;
   --font: "Halyard Display", Manrope, "Avenir Next", "Segoe UI", sans-serif;
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  /* Shared type scale, so every section's headings and copy match. */
+  --h2-size: clamp(30px, 3.34vw, 48px);
+  --intro-size: 18px;
+  --item-title: 20px;
+  --item-body: 16px;
   --wrap: min(1320px, calc(100% - 120px));
   --wrap-narrow: min(1120px, calc(100% - 120px));
+}
+
+@media (max-width: 640px) {
+  :root {
+    --intro-size: 16.5px;
+    --item-title: 18px;
+    --item-body: 15px;
+  }
 }
 
 * {
@@ -148,7 +161,7 @@ a.btn {
   border-radius: 8px;
   background: var(--ink);
   color: #fff;
-  font-weight: 600;
+  font-weight: 500;
   transform: translateY(-160%);
   transition: transform 0.2s ease;
 }
@@ -201,7 +214,7 @@ a.btn {
   background: var(--blue);
   color: #fff;
   font-size: 15px;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: -0.01em;
   box-shadow: 0 10px 24px rgba(64, 91, 255, 0.28);
   transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease), background 0.25s ease;
@@ -262,15 +275,15 @@ a.btn {
   background: #e7ebff;
   color: #3d56f5;
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: -0.01em;
   animation: fadeUp 0.7s var(--ease) 0.08s both;
 }
 
 h1 {
   margin: 0;
-  font-size: clamp(40px, 3.65vw, 54px);
-  font-weight: 700;
+  font-size: clamp(40px, 3.65vw, 62px);
+  font-weight: 600;
   letter-spacing: -0.042em;
   line-height: 1.12;
 }
@@ -292,12 +305,12 @@ h1 {
 }
 
 .lede {
-  max-width: 500px;
+  max-width: 580px;
   margin: 22px 0 0;
   color: var(--muted);
-  font-size: 17.5px;
-  font-weight: 500;
-  line-height: 1.55;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1.45;
   letter-spacing: -0.015em;
   animation: fadeUp 0.9s var(--ease) 0.32s both;
 }
@@ -366,8 +379,8 @@ h1 {
 .problems h2 {
   margin: 0 auto;
   max-width: 980px;
-  font-size: clamp(28px, 2.6vw, 38px);
-  font-weight: 700;
+  font-size: var(--h2-size);
+  font-weight: 600;
   letter-spacing: -0.038em;
   line-height: 1.15;
 }
@@ -376,8 +389,8 @@ h1 {
   margin: 18px auto 0;
   max-width: 720px;
   color: var(--muted);
-  font-size: 16.5px;
-  font-weight: 500;
+  font-size: var(--intro-size);
+  font-weight: 400;
   line-height: 1.55;
   letter-spacing: -0.012em;
 }
@@ -409,8 +422,8 @@ h1 {
 
 .card h3 {
   margin: 22px 0 0;
-  font-size: 18px;
-  font-weight: 700;
+  font-size: var(--item-title);
+  font-weight: 600;
   letter-spacing: -0.028em;
   line-height: 1.3;
 }
@@ -418,8 +431,8 @@ h1 {
 .card p {
   margin: 10px 0 0;
   color: var(--muted);
-  font-size: 15px;
-  font-weight: 500;
+  font-size: var(--item-body);
+  font-weight: 400;
   line-height: 1.5;
   letter-spacing: -0.01em;
 }
@@ -596,7 +609,7 @@ h1 {
   }
 
   .hero-grid {
-    grid-template-columns: minmax(0, 760px);
+    grid-template-columns: minmax(0, 820px);
   }
 
   .hero-visual {
@@ -613,8 +626,13 @@ h1 {
   }
 }
 
-/* 1280–1440px: cropped banner pinned to the right edge of the screen. */
+/* 1280–1440px: cropped banner pinned to the right edge of the screen. The
+   headline grows towards the 62px Figma size but stops short of the banner. */
 @media (min-width: 1280px) and (max-width: 1440px) {
+  h1 {
+    font-size: min(62px, calc(7.84vw - 50px));
+  }
+
   .hero-visual {
     right: 0;
     width: 549px;
@@ -628,6 +646,12 @@ h1 {
 /* Above 1440px: full banner kept inside the 1320px container. The SVG has
    22px of shadow padding on the right, so offset by that to align edges. */
 @media (min-width: 1441px) {
+  /* Largest size that keeps the headline clear of the banner with the
+     current fallback font; 62px once Halyard Display is self-hosted. */
+  h1 {
+    font-size: 56px;
+  }
+
   /* 1320px container minus the ~700px headline leaves ~580px; size the
      banner so the visible dashboard fits beside the copy without overlap. */
   .hero-visual {
@@ -691,7 +715,7 @@ h1 {
   }
 
   .lede {
-    font-size: 16px;
+    font-size: 18px;
   }
 
   .header {
@@ -714,7 +738,7 @@ h1 {
 .steps {
   position: relative;
   overflow: clip;
-  padding: 64px 0 96px;
+  padding: 96px 0 112px;
   background: #2b2b2b;
   color: #fff;
 }
@@ -732,128 +756,310 @@ h1 {
   pointer-events: none;
 }
 
-.steps-grid {
+.steps-layout {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
-  gap: 48px;
+  grid-template-columns: minmax(0, 1.12fr) minmax(320px, 0.88fr);
+  gap: 56px;
   align-items: start;
+  margin-top: 40px;
 }
 
-.steps-head {
-  position: sticky;
-  top: 120px;
-  margin-top: 40px;
+.steps-stage {
+  position: relative;
+  aspect-ratio: 718 / 540;
+  border-radius: 24px;
+  background: linear-gradient(46deg, #c2cafa 29.09%, #eceef8 93.15%);
+  overflow: hidden;
 }
 
 .steps h2 {
   margin: 0;
-  max-width: 560px;
-  font-size: clamp(32px, 3.2vw, 46px);
-  font-weight: 700;
+  font-size: var(--h2-size);
+  font-weight: 600;
   letter-spacing: -0.04em;
   line-height: 1.12;
 }
 
 .steps h2 span {
-  color: #7488ff;
+  color: #8b99ff;
 }
 
 .step-list {
   display: grid;
-  gap: 30px;
+  gap: 4px;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
 .step {
+  position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 300px);
-  gap: 28px;
-  align-items: center;
-  padding: 22px 22px 22px 48px;
-  border: 1px solid rgba(255, 255, 255, 0.72);
-  border-radius: 28px;
-  transition: border-color 0.4s var(--ease), background 0.4s var(--ease);
+  grid-template-columns: 34px minmax(0, 1fr);
+  gap: 16px;
+  width: 100%;
+  padding: 22px 20px;
+  border: 0;
+  border-radius: 0 0 4px 4px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.35s var(--ease);
 }
 
 .step:hover {
-  border-color: #7488ff;
-  background: rgba(116, 136, 255, 0.06);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.step.is-active {
+  background: rgba(255, 255, 255, 0.07);
 }
 
 .step-num {
   display: grid;
   place-items: center;
-  width: 42px;
-  height: 42px;
-  border-radius: 8px;
+  width: 34px;
+  height: 34px;
+  border-radius: 7px;
   background: #6479f8;
-  font-size: 22px;
-  font-weight: 600;
+  font-size: 17px;
+  font-weight: 500;
 }
 
-.step h3 {
-  margin: 18px 0 0;
-  font-size: 21px;
-  font-weight: 700;
+.step-title {
+  display: block;
+  padding-top: 3px;
+  font-size: var(--item-title);
+  font-weight: 600;
   letter-spacing: -0.028em;
   line-height: 1.25;
 }
 
-.step p {
-  margin: 12px 0 0;
-  max-width: 240px;
-  color: rgba(255, 255, 255, 0.86);
-  font-size: 16.5px;
-  font-weight: 500;
-  line-height: 1.45;
+.step-body {
+  display: block;
+  margin-top: 8px;
+  max-width: 400px;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: var(--item-body);
+  font-weight: 400;
+  line-height: 1.5;
   letter-spacing: -0.012em;
 }
 
-.step-media {
-  overflow: hidden;
-  aspect-ratio: 368 / 228;
-  border-radius: 12px;
-  background: #fff;
+/* Progress line along the top edge of the active step. */
+.step-progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.14);
+  opacity: 0;
+  transition: opacity 0.35s var(--ease);
 }
 
-.step-media img {
-  width: 100%;
+.step.is-active .step-progress {
+  opacity: 1;
+}
+
+.step-progress span {
+  display: block;
+  width: 0;
   height: 100%;
+  background: #8b99ff;
+}
+
+.steps.is-playing .step.is-active .step-progress span {
+  animation: stepLoad 6.5s linear forwards;
+}
+
+@keyframes stepLoad {
+  to {
+    width: 100%;
+  }
+}
+
+/* Mobile copies of the art, shown under each step. */
+.step-media {
+  display: none;
+}
+
+/* ---- Scenes: one per step, built from separate layers ---- */
+
+.scene {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s var(--ease), visibility 0s linear 0.4s;
+}
+
+.scene.is-active {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.4s var(--ease);
+}
+
+/* Left-aligned art sits flush against the box's left edge. */
+.scene[data-align="start"] {
+  justify-content: flex-start;
+}
+
+.scene-art {
+  position: relative;
+  /* Sized so the whole artboard fits inside the box, nothing cropped. */
+  width: var(--scene-width, 90%);
+  container-type: inline-size;
+}
+
+.scene-layer {
+  position: absolute;
+  display: block;
+  max-width: none;
   object-fit: cover;
-  object-position: left top;
-  transition: transform 0.6s var(--ease);
 }
 
-.step:hover .step-media img {
-  transform: scale(1.04);
+.scene-ring {
+  outline: 2px solid #7488ff;
+  outline-offset: -1px;
 }
 
-@media (max-width: 1100px) {
-  .steps-grid {
+.scene-pill {
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(81, 109, 77, 0.35);
+  border-radius: 999px;
+  background: #d5f3d8;
+  color: #4f9a47;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+/* Layers wait hidden once JavaScript is running, then play in sequence. */
+.steps.is-ready .steps-stage .scene-layer,
+.steps.is-ready .step-media:not(.is-in) .scene-layer {
+  opacity: 0;
+}
+
+.steps.is-playing .scene.is-active .scene-layer,
+.steps.is-ready .step-media.is-in .scene-layer {
+  animation: sceneIn 0.75s var(--ease) both;
+  animation-delay: calc(0.12s + var(--i) * 0.14s);
+}
+
+.scene-layer[data-from="left"] {
+  --from: translateX(-8%);
+}
+
+.scene-layer[data-from="right"] {
+  --from: translateX(8%);
+}
+
+.scene-layer[data-from="up"] {
+  --from: translateY(10%);
+}
+
+.scene-layer[data-from="pop"] {
+  --from: translateY(14%) scale(0.86);
+  animation-timing-function: cubic-bezier(0.34, 1.45, 0.64, 1) !important;
+}
+
+@keyframes sceneIn {
+  from {
+    opacity: 0;
+    transform: var(--from, none);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (max-width: 980px) {
+  .steps {
+    padding: 72px 0 80px;
+  }
+
+  .steps-layout {
     grid-template-columns: 1fr;
   }
 
-  .steps-head {
-    position: static;
-    margin-top: 0;
+  .steps-layout {
+    margin-top: 32px;
+  }
+
+  .steps-stage {
+    display: none;
+  }
+
+  .step-list {
+    gap: 16px;
+  }
+
+  .step-list li {
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.06);
+    overflow: hidden;
+  }
+
+  /* Every step is shown at once: title, then description, then image. */
+  .step,
+  .step:hover,
+  .step.is-active {
+    padding: 24px 20px 20px;
+    background: transparent;
+    cursor: default;
+  }
+
+  .step-progress {
+    display: none;
+  }
+
+  .step-body {
+    max-width: none;
+  }
+
+  .step-media {
+    position: relative;
+    display: block;
+    margin: 0 12px 12px;
+    aspect-ratio: 718 / 540;
+    border-radius: 14px;
+    background: linear-gradient(46deg, #c2cafa 29.09%, #eceef8 93.15%);
+    overflow: hidden;
+  }
+
+  .step-media .scene {
+    opacity: 1;
+    visibility: visible;
   }
 }
 
 @media (max-width: 640px) {
   .steps {
-    padding: 72px 0 80px;
+    padding: 56px 0 64px;
   }
 
   .step {
-    grid-template-columns: 1fr;
-    padding: 24px;
+    grid-template-columns: 30px minmax(0, 1fr);
+    gap: 14px;
   }
 
-  .step p {
-    max-width: none;
+  .step-num {
+    width: 30px;
+    height: 30px;
+    font-size: 15px;
+  }
+
+  .step-title {
+    padding-top: 2px;
   }
 }
 
@@ -867,8 +1073,8 @@ h1 {
 .features h2 {
   margin: 0 auto;
   max-width: 760px;
-  font-size: 36px;
-  font-weight: 700;
+  font-size: var(--h2-size);
+  font-weight: 600;
   letter-spacing: -0.04em;
   line-height: 1.08;
 }
@@ -877,8 +1083,8 @@ h1 {
   margin: 28px auto 0;
   max-width: 860px;
   color: var(--muted);
-  font-size: 18px;
-  font-weight: 500;
+  font-size: var(--intro-size);
+  font-weight: 400;
   line-height: 1.4;
   letter-spacing: -0.015em;
 }
@@ -949,8 +1155,8 @@ h1 {
   margin: 22px 0 0;
   max-width: 560px;
   color: #fff;
-  font-size: 18px;
-  font-weight: 500;
+  font-size: var(--intro-size);
+  font-weight: 400;
   line-height: 1.35;
   letter-spacing: -0.015em;
 }
@@ -974,9 +1180,6 @@ h1 {
     padding: 72px 0 64px;
   }
 
-  .features h2 {
-    font-size: 30px;
-  }
 
   .features h2 br,
   .beta p br {
@@ -1035,8 +1238,8 @@ h1 {
 
 .testimonial h2 {
   margin: 0;
-  font-size: clamp(28px, 2.6vw, 36px);
-  font-weight: 700;
+  font-size: var(--h2-size);
+  font-weight: 600;
   letter-spacing: -0.035em;
   line-height: 1.22;
 }
@@ -1062,7 +1265,7 @@ h1 {
   margin: 0 0 30px;
   color: #2a2a2a;
   font-size: clamp(18px, 1.6vw, 22px);
-  font-weight: 500;
+  font-weight: 400;
   line-height: 1.55;
   letter-spacing: -0.02em;
 }
@@ -1070,7 +1273,7 @@ h1 {
 .testimonial-name {
   margin: 0;
   font-size: 22px;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: -0.02em;
 }
 
@@ -1093,8 +1296,8 @@ h1 {
 
 .signup h2 {
   margin: 0;
-  font-size: clamp(32px, 3.3vw, 46px);
-  font-weight: 700;
+  font-size: var(--h2-size);
+  font-weight: 600;
   letter-spacing: -0.035em;
   line-height: 1.15;
 }
@@ -1102,8 +1305,8 @@ h1 {
 .signup-copy {
   margin: 20px auto 0;
   max-width: 560px;
-  font-size: 18px;
-  font-weight: 500;
+  font-size: var(--intro-size);
+  font-weight: 400;
   line-height: 1.45;
   letter-spacing: -0.015em;
 }
@@ -1140,7 +1343,7 @@ h1 {
 
 .signup-embed .hs-form-field > label {
   font-size: 15px;
-  font-weight: 500;
+  font-weight: 400;
   color: #fff;
 }
 
@@ -1192,7 +1395,7 @@ h1 {
 .signup-embed .hs-error-msgs label {
   display: block;
   font-size: 13.5px;
-  font-weight: 500;
+  font-weight: 400;
   color: #ffe1e1;
 }
 
@@ -1218,7 +1421,7 @@ h1 {
   color: #fff;
   font: inherit;
   font-size: 15px;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: -0.01em;
   cursor: pointer;
   transition: background 0.25s ease, transform 0.35s var(--ease);
@@ -1248,7 +1451,7 @@ h1 {
   background: rgba(255, 255, 255, 0.16);
   color: #fff;
   font-size: 17px;
-  font-weight: 500;
+  font-weight: 400;
   text-align: center;
 }
 
@@ -1315,14 +1518,14 @@ h1 {
   background: #3a3a3a;
   color: #fff;
   font-size: 13px;
-  font-weight: 500;
+  font-weight: 400;
   letter-spacing: -0.01em;
 }
 
 .faq h2 {
   margin: 28px 0 0;
-  font-size: clamp(32px, 3vw, 42px);
-  font-weight: 700;
+  font-size: var(--h2-size);
+  font-weight: 600;
   letter-spacing: -0.038em;
   line-height: 1.15;
 }
@@ -1357,8 +1560,8 @@ h1 {
   background: transparent;
   color: #fff;
   font: inherit;
-  font-size: 18px;
-  font-weight: 500;
+  font-size: var(--item-title);
+  font-weight: 400;
   letter-spacing: -0.02em;
   text-align: left;
   cursor: pointer;
@@ -1402,8 +1605,8 @@ h1 {
   margin: 0;
   padding: 0 28px 24px;
   color: rgba(255, 255, 255, 0.78);
-  font-size: 16px;
-  font-weight: 500;
+  font-size: var(--item-body);
+  font-weight: 400;
   line-height: 1.55;
   letter-spacing: -0.012em;
 }
@@ -1416,7 +1619,6 @@ h1 {
   .faq-item button {
     min-height: 68px;
     padding: 0 18px;
-    font-size: 16px;
   }
 
   .faq-answer p {
@@ -1446,7 +1648,7 @@ h1 {
 .footer-links a {
   color: #7a7f8a;
   font-size: 15px;
-  font-weight: 500;
+  font-weight: 400;
   letter-spacing: -0.01em;
   transition: color 0.2s ease;
 }
@@ -1472,8 +1674,9 @@ h1 {
     transition: none !important;
   }
 
-  .reveal {
-    opacity: 1;
+  .reveal,
+  .scene-layer {
+    opacity: 1 !important;
     transform: none;
   }
 }

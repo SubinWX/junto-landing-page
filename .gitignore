@@ -10,3 +10,8 @@ _nextjs-version
 # Unused originals (replaced by feature-team-2x.png and founders-photo.jpg)
 public/images/feature-team.svg
 public/images/founders-photo.png
+
+# Figma exports of the step illustrations; the page uses the split .webp layers
+public/images/step-setup.svg
+public/images/step-invoice.svg
+public/images/step-pay.svg

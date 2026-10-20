@@ -3,31 +3,31 @@ export const faqItems = [
   {
     question: "Who is Junto for?",
     answer:
-      "Small and mid-size teams that work with contractors in more than one country. Junto keeps time, invoices, and payments in one place, without the enterprise tools most small teams end up outgrowing.",
+      "Small and mid-size companies and agencies that work with contractors around the world. If you’re managing people, projects, and payments across different countries, Junto is built for you.",
   },
   {
     question: "How much does it cost?",
     answer:
-      "Junto is in beta, and public pricing isn’t final yet. Beta users get early access while we build the product with them.",
+      "Junto is free during the beta. We’re still finalizing pricing for after the beta, and beta members will be the first to hear about it.",
   },
   {
-    question: "What happens after I sign up?",
+    question: "What happens when I sign up?",
     answer:
-      "We add you to the list and email you when your spot is ready. There’s nothing to install, and no payment to make today.",
+      "You’ll join the early access list. As soon as Junto opens, we’ll email you so you’re among the first to get in.",
   },
   {
     question: "How do payments work?",
     answer:
-      "Contractors invoice from the hours they track. You review and approve inside Junto, then pay them there. During beta, payments run through Stripe.",
+      "Contractors submit their invoices in Junto, and you review, approve, and pay them in the same place. During the beta, payments are processed through Stripe.",
   },
   {
     question: "Do my contractors need an account?",
     answer:
-      "Yes. Each contractor gets an account so they can log time against a client, project, and sprint, and send invoices from that work.",
+      "Yes. You invite your contractors to Junto, where they log their time and submit their invoices, either manually or auto-filled from their tracked hours.",
   },
   {
-    question: "What will you ask from me as a beta user?",
+    question: "What will you ask from me as a beta member?",
     answer:
-      "Use Junto on real projects and tell us what’s missing. You get a direct line to the team and a say in what we build next.",
+      "Your honest feedback. We’re building Junto with the companies that use it, so we’ll ask what’s working, what’s missing, and what you need next.",
   },
 ];

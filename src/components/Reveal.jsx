@@ -1,6 +1,17 @@
 import { useEffect, useRef, useState } from "react";
 
-export default function Reveal({ children, className = "", delay = 0, as: Tag = "div" }) {
+// Fades children in once they scroll into view. `variant` picks the entrance:
+// "up" (default), "left", "right", "scale", "mask" (heading rises from behind
+// a clip), or "clip" (wipes open from the bottom). Nested elements can key
+// their own animations off `.reveal.is-in` and the `--delay` custom property.
+export default function Reveal({
+  children,
+  className = "",
+  delay = 0,
+  variant = "up",
+  threshold = 0.22,
+  as: Tag = "div",
+}) {
   const ref = useRef(null);
   const [visible, setVisible] = useState(false);
 
@@ -21,18 +32,19 @@ export default function Reveal({ children, className = "", delay = 0, as: Tag = 
           observer.disconnect();
         }
       },
-      { threshold: 0.22, rootMargin: "0px 0px -8% 0px" }
+      { threshold, rootMargin: "0px 0px -8% 0px" }
     );
 
     observer.observe(node);
     return () => observer.disconnect();
-  }, []);
+  }, [threshold]);
 
   return (
     <Tag
       ref={ref}
       className={`reveal ${visible ? "is-in" : ""} ${className}`.trim()}
-      style={{ transitionDelay: `${delay}ms` }}
+      data-variant={variant}
+      style={{ transitionDelay: `${delay}ms`, "--delay": `${delay}ms` }}
     >
       {children}
     </Tag>

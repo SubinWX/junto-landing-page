@@ -8,6 +8,7 @@ import Testimonial from "./components/Testimonial.jsx";
 import Signup from "./components/Signup.jsx";
 import Footer from "./components/Footer.jsx";
 import Faq from "./components/Faq.jsx";
+import ScrollEffects from "./components/ScrollEffects.jsx";
 
 export default function App() {
   // Scroll to in-page sections without adding "#section" to the URL.
@@ -38,6 +39,7 @@ export default function App() {
       <a className="skip-link" href="#main">
         Skip to content
       </a>
+      <ScrollEffects />
       <div className="orb orb-a" aria-hidden="true" />
       <div className="orb orb-b" aria-hidden="true" />
       <div className="orb orb-c" aria-hidden="true" />

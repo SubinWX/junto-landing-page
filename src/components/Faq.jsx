@@ -18,7 +18,7 @@ export default function Faq() {
             const isOpen = open === index;
             const panelId = `faq-panel-${index}`;
             return (
-              <Reveal key={item.question} delay={index * 60} className="faq-reveal">
+              <Reveal key={item.question} delay={index * 60} className="faq-reveal" variant="left">
                 <div className={isOpen ? "faq-item is-open" : "faq-item"}>
                   <h3 className="faq-q">
                     <button

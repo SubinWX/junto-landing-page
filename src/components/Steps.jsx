@@ -172,9 +172,11 @@ export default function Steps() {
     <section className={sectionClass} ref={sectionRef} aria-labelledby="steps-title">
       <div className="steps-glow" aria-hidden="true" />
       <div className="wrap">
-        <h2 id="steps-title">
-          From tracked hour to paid invoice, <span>all connected</span>
-        </h2>
+        <Reveal variant="mask">
+          <h2 id="steps-title">
+            From tracked hour to paid invoice, <span>all connected</span>
+          </h2>
+        </Reveal>
       </div>
       <div className="wrap steps-layout">
         <div className="steps-stage" aria-hidden="true">

@@ -52,7 +52,7 @@ export default function Signup() {
   return (
     <section className="signup" id="early-access" aria-labelledby="signup-title">
       <div className="wrap">
-        <Reveal>
+        <Reveal variant="mask">
           <h2 id="signup-title">
             Ready to run your global team
             {" "}<br />

@@ -43,7 +43,7 @@ export default function Features() {
   return (
     <section className="features" aria-labelledby="features-title">
       <div className="wrap">
-        <Reveal>
+        <Reveal variant="mask">
           <h2 id="features-title">
             Everything you need to run a profitable
             {" "}<br />
@@ -59,8 +59,11 @@ export default function Features() {
         {rows.map((row, rowIndex) => (
           <div key={rowIndex} className={rowIndex === 0 ? "feature-row" : "feature-row feature-row-b"}>
             {row.map((card, index) => (
-              <Reveal key={card.title} delay={rowIndex * 80 + index * 90} className="feature-reveal">
-                <article className={card.wide ? "feature-card feature-card-wide" : "feature-card feature-card-narrow"}>
+              <Reveal key={card.title} delay={rowIndex * 80 + index * 90} className="feature-reveal" variant="clip" threshold={0.15}>
+                <article
+                  className={card.wide ? "feature-card feature-card-wide" : "feature-card feature-card-narrow"}
+                  data-parallax
+                >
                   {/* The image shows this text; keep a real heading for search engines and screen readers. */}
                   <h3 className="sr-only">{card.title}</h3>
                   <p className="sr-only">{card.body}</p>
@@ -78,8 +81,8 @@ export default function Features() {
           </div>
         ))}
 
-        <Reveal>
-          <div className="beta">
+        <Reveal variant="scale">
+          <div className="beta" data-parallax>
             <h2>Join the beta and help shape what we build next</h2>
             <p>
               Get early access, a direct line to our team, and a real say

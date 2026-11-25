@@ -4,8 +4,9 @@ export default function Testimonial() {
   return (
     <section className="testimonial" aria-labelledby="testimonial-title">
       <div className="wrap testimonial-grid">
-        <Reveal className="testimonial-photo">
+        <Reveal className="testimonial-photo" variant="clip" threshold={0.15}>
           <img
+            data-parallax
             src="/images/founders-photo.jpg"
             alt="Martijn van Dooren, CEO of WX Agency, with Melvin Heinsius"
             width="860"
@@ -15,7 +16,7 @@ export default function Testimonial() {
           />
         </Reveal>
 
-        <Reveal delay={120} className="testimonial-copy">
+        <Reveal delay={120} variant="right" className="testimonial-copy">
           <h2 id="testimonial-title">
             Built by an agency,
             {" "}<br />
